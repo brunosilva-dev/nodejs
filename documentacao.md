@@ -90,3 +90,57 @@ app.listen(3000, function () {
   console.log("Servidor rodando com Express");
 });
 ```
+
+- Instalando EJS
+
+> Permite escrever paginas HTML com engine JS
+
+> Comando para efetuar a instalação do EJS "npm install ejs --save" (no projeto foi usado npm install ejs@2.5.6 --save)
+
+> Após a instalação, deve inserir dentro do código o .set('view engine', 'ejs') para informar que existe uma nova geração de views e que será o EJS
+
+```node
+let express = require("express");
+let app = express();
+
+app.set("view engine", "ejs");
+
+app.get("/", function (req, res) {
+  res.send("<html><body>Portal de Notícias</body></html>");
+});
+
+app.get("/tecnologia", function (req, res) {
+  res.send("<html><body>Notícias de Tecnologia</body></html>");
+});
+
+app.listen(3000, function () {
+  console.log("Servidor rodando com Express");
+});
+```
+
+- Gerar o diretório views para centralizar todas as views HTML dentro de um local
+
+> Agora com o EJS gerando o arquivo, não precisamos mais usar o método res.send() mas sim res.render(), pois, no send enviavamos o html dentro do método e agora com render apenas indicamos o arquivo HTML
+
+```node
+let express = require("express");
+let app = express();
+
+app.set("view engine", "ejs");
+
+app.get("/", function (req, res) {
+  res.render("home/index");
+});
+
+app.get("/formulario_inclusao_noticia", function (req, res) {
+  res.render("admin/form_add_noticia");
+});
+
+app.get("/noticias", function (req, res) {
+  res.render("noticias/noticias");
+});
+
+app.listen(3000, function () {
+  console.log("Servidor rodando com Express");
+});
+```
